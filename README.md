@@ -1,9 +1,11 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 # TicTacToe
+
+## "MVP"
+
+- Erster Spieler Auswahl zwischen 2 buttons
+- Grid, in dem beim ersten Klick der erste Spieler eingetragen wird und dann immer abwechselnd, bis ein Symbol eine Reihe vervollständigt hat.
+
+1.Grobes Frontend-Design
+
+2.Funktionalität
+3.Verbesserung des Designs
