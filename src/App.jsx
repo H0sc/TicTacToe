@@ -1,41 +1,64 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./styles/styles.css";
 
-function App() {
-  const [player, setPlayer] = useState("");
-  const [fields, setFields] = useState()
-
-  const handleClick = (e) => {
-    e.target.innerText = player
-    if (e.target.innerText !== "") return
-    if (player === "X") {setPlayer("O")}
-    else {setPlayer("X")}
-  }
-
+function Square({value, onSquareClick}) {
+  
   return (
-    <>
-      <div className="players">
-        <h1>select your symbol:</h1>
-        <button value="O" onClick={(e) => setPlayer(e.target.value)}>
-          O
-        </button>
-        <button value="X" onClick={(e) => setPlayer(e.target.value)}>
-          X
-        </button>
-      </div>
-      <div className="grid">
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-        <div onClick={e => handleClick(e)}></div>
-      </div>
-    </>
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
   );
 }
 
-export default App;
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXisNext] = useState(true)
+
+  function handleClick(i) {
+    if (squares[i]) {
+      return
+    }
+
+    const nextSquares = squares.slice()
+    if (xIsNext) {
+      nextSquares[i] = "X"
+    } else {
+      nextSquares[i] = "O"
+    }
+    setXisNext(!xIsNext)
+    setSquares(nextSquares)
+  }
+
+  return (
+    <div className="board">
+      <div className="board-row">
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
+      </div>
+      <div className="board-row">
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
+      </div>
+      <div className="board-row">
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
+      </div>
+    </div>
+  );
+}
+
+function calculateWinner() {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+}
